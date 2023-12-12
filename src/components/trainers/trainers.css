@@ -1,0 +1,33 @@
+.trainers-background {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+.trainers-container {
+    padding: 20px;
+}
+.trainer-surname {
+    color: whitesmoke;
+}
+
+.trainer-card {
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: darkgrey;
+}
+
+.trainer-col {
+    padding: 10px;
+}
+
+.trainer-image {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.view-profile-btn {
+    margin-top: 10px;
+    width: 100%;
+}

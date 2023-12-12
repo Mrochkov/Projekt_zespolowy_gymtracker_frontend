@@ -1,0 +1,23 @@
+.messenger-container {
+    padding-top: 50px;
+    color: white;
+    background-color: #1a1a1a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.conversation-window {
+    color: darkgrey;
+}
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.list-group-item {
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,82 @@
+.home {
+    color: white;
+    background-color: #1a1a1a;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position-y: top;
+    min-height: 100vh;
+}
+
+.hero-section {
+    text-align: left;
+    padding: 100px 50px;
+    max-width: 500px;
+}
+
+.hero-section h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.hero-section p {
+    margin-bottom: 30px;
+}
+
+.cta-buttons .btn {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.cta-buttons .btn:hover {
+    transform: translateY(-2px);
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: -100px;
+    padding-bottom: 50px;
+}
+
+.feature-item {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 240px;
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item .icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.feature-item h3 {
+    margin-bottom: 10px;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+

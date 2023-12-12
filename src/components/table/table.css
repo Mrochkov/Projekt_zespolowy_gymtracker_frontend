@@ -1,0 +1,35 @@
+.container-workout {
+    color: white;
+    background-color: #1a1a1a;
+    min-height: 100vh;
+    min-width: 100vw;
+    padding: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.table {
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.card {
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    max-width: 60vw;
+    margin-bottom: 20px;
+
+}
+
+.card-title {
+    color: lightgrey;
+}
+
+.form-label, .form-control {
+
+}

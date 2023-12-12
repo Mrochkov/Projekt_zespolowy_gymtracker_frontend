@@ -1,0 +1,46 @@
+.opinion-form-container {
+    position: fixed;
+    bottom: 10px;
+    left: 0%;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+}
+
+.opinion-form-container .form-control {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    margin-bottom: 10px;
+}
+
+.opinion-form-container .btn-primary {
+    width: 100%;
+    background-color: whitesmoke;
+    border-color: #333;
+    color: black;
+}
+
+.opinions-list {
+    margin-top: 40px;
+    padding: 20px;
+}
+
+.opinion-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.opinion-form-container .form-control::placeholder{
+    color: darkgrey;
+}
+
+.header{
+    padding-top: 20px;
+}
