@@ -29,7 +29,7 @@
     background-color: #333;
     border-radius: 10px;
     padding: 30px;
-    max-width: 90vw;
+    max-width: 65vw;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     margin-bottom: 20px;
@@ -57,7 +57,13 @@
 .profile-picture-grid {
 
 }
+.gym-title {
+    margin-top: 20px;
+}
 
+.gym-col {
+    margin-top: 15px;
+}
 .profile-row{
 
 }

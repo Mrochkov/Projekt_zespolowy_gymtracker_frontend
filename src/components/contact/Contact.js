@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, ListGroup, Form, Button, InputGroup } from 'react-bootstrap';
-import pop from '../images/pop.jpg';
+import pop from '../images/1.png';
 import cbum from "../images/cbum.jpg";
 import dumbbell from '../images/dumbbell.jpg';
 import "./contact.css";

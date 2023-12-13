@@ -1,32 +1,27 @@
 import React, {useEffect, useState} from 'react';
 import './profile.css';
 import Navbar from "../navbar/Navbar";
-import profilePic from '../images/pop.jpg';
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
 import Footer from "../footer/Footer";
 import {useLocation} from "react-router-dom";
 import api from "../../api/axiosConfig";
+import cbum from "../images/cbum.jpg";
 
 const Profile = () => {
 
-    const {state} = useLocation();
-    const trainerId = state.id;
-    const [trainer,setTrainer] = useState(null);
+    const { state } = useLocation();
+    const trainerId = state ? state.id : null;
+    const [trainer, setTrainer] = useState(null);
 
+    /*
     useEffect(() => {
        api.get("/trainer",{params: {id: trainerId}}).then((response)=> {setTrainer(response.data)});
     },[]);
 
-    const userData = {
-        name: 'Mr Wojak',
-        bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam aspernatur beatae commodi dolore iusto, labore maxime nam quam? Dicta dignissimos impedit minima mollitia placeat quidem. Doloremque maiores perspiciatis reiciendis sequi!',
-        location: 'Białystok, Polska',
-        experience: '22 years of constant training and building my own body. Coached Krzysiu to deadlift whole enormous amount of 70kg for a total of 1 rep.',
-        gyms: 'Atleta gym, Planet Fitness',
-        specializations: ['Personal Training', 'Nutrition', 'Weightlifting', 'Ju-jitsu']
-    };
+
+     */
 
     const [comments, setComments] = useState([
         { name: "Brajanek", message: "Podoba sie dla mnie pan trener", date: "05-12-2023" }
@@ -39,6 +34,17 @@ const Profile = () => {
         setComments([...comments, { ...newComment, date: new Date().toLocaleDateString() }]);
         setNewComment({ name: "", message: "" });
     };
+
+    useEffect(() => {
+        if (trainerId) {
+            api.get("/trainer", { params: { id: trainerId } })
+                .then((response) => {
+                    setTrainer(response.data);
+                })
+        }
+    }, [trainerId]);
+
+
 
     const renderRating = () => {
         let rating = [];
@@ -59,11 +65,13 @@ const Profile = () => {
     //const trainer = location.state.trainer;
 
     const handleViewProfile = () => {
-        trainer && console.log(trainer.name);
-        //window.location.href = '/contact';
+        window.location.href = '/contact';
 
     };
 
+    const getImagePath = (image) => {
+        return require(`../images/${image}`);
+    };
 
     return (
         <div>
@@ -71,12 +79,15 @@ const Profile = () => {
                 <Navbar/>
                 <div className="profile-background">
                     <div className="profile-container larger-profile">
+                        {trainer && (
                         <Row className="profile-row">
                             <Col md={4} className="profile-picture-col">
-                                <img src={profilePic} alt="Profile" className="profile-picture" />
+                                <img src={getImagePath(trainer.image)} alt="Profile" className="profile-picture"/>
                                 <div className="profile-details">
                                     <h1 className="name">{trainer.name}</h1>
-                                    <p className="location">{userData.location}</p>
+                                    <p className="location">{trainer.surname}</p>
+                                    <h5 className="rating-text"><strong>Price:</strong></h5>
+                                    <p className="rating-text">{trainer.hourlyRate} zł/h</p>
                                     <p className="rating-text"><strong>Rating: </strong></p>
                                     <div className="rating">{renderRating()}</div>
                                     <Button
@@ -89,23 +100,33 @@ const Profile = () => {
                             <Col md={8}>
                                 <h2 className="specializations-title">Specializations</h2>
                                 <Row>
-                                    {userData.specializations.map((specialization, index) => (
-                                        <Col md={6} lg={3} key={index} className="specialization-col">
+                                    {trainer && trainer.specializationList.map((specialization, id) => (
+                                        <Col md={6} lg={3} key={id} className="specialization-col">
                                             <div className="specialization-item">
-                                                {specialization}
+                                                {specialization.name}
                                             </div>
                                         </Col>
                                     ))}
                                 </Row>
+
                                 <h2 className="about">About me</h2>
-                                <p className="bio">{userData.bio}</p>
-                                <h2 className="about">Gyms</h2>
-                                <p className="gyms">{userData.gyms}</p>
-                                <h2 className="about">Experience </h2>
-                                <p className="experience">{userData.experience}</p>
+                                <p className="bio">{trainer.description}</p>
+
+                                <Row>
+                                    <h2 className="gym-title">Gyms</h2>
+                                    {trainer && trainer.gymList.map((gym, id) => (
+                                        <Col md={12} key={id} className="gym-col">
+                                            <div className="gym-item">
+                                                - {gym.name}
+                                            </div>
+                                        </Col>
+                                    ))}
+                                </Row>
+
+
                             </Col>
                         </Row>
-
+                         )}
 
                         <div className="profile-opinions">
                             <Row className="justify-content-md-center">
