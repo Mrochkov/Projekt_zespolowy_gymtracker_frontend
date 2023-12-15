@@ -22,7 +22,14 @@ const SignUp = () => {
     const { username, email, password, name, surname, phoneNumber, gender, birthday } = user;
 
     const onInputChange = (e) => {
+        setUser({ ...user, [e.target.username]: e.target.value });
+        setUser({ ...user, [e.target.email]: e.target.value });
+        setUser({ ...user, [e.target.password]: e.target.value });
         setUser({ ...user, [e.target.name]: e.target.value });
+        setUser({ ...user, [e.target.surname]: e.target.value });
+        setUser({ ...user, [e.target.phoneNumber]: e.target.value });
+        setUser({ ...user, [e.target.gender]: e.target.value });
+        setUser({ ...user, [e.target.birthday]: e.target.value });
     };
 
     const onSubmit = async (e) => {

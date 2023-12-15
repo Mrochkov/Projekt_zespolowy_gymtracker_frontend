@@ -23,16 +23,13 @@ const Profile = () => {
 
      */
 
-    const [comments, setComments] = useState([
-        { name: "Brajanek", message: "Podoba sie dla mnie pan trener", date: "05-12-2023" }
-    ]);
+    const [opinions, setOpinions] = useState([]);
 
-    const [newComment, setNewComment] = useState({ name: "", message: "" });
+    const [newOpinion, setNewOpinion] = useState({ score: "", comment: "" });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setComments([...comments, { ...newComment, date: new Date().toLocaleDateString() }]);
-        setNewComment({ name: "", message: "" });
+        setNewOpinion({ score: "", comment: "" });
     };
 
     useEffect(() => {
@@ -40,6 +37,10 @@ const Profile = () => {
             api.get("/trainer", { params: { id: trainerId } })
                 .then((response) => {
                     setTrainer(response.data);
+                })
+            api.get(`/trainer/${trainerId}/opinions`)
+                .then(response => {
+                    setOpinions(response.data);
                 })
         }
     }, [trainerId]);
@@ -100,7 +101,7 @@ const Profile = () => {
                             <Col md={8}>
                                 <h2 className="specializations-title">Specializations</h2>
                                 <Row>
-                                    {trainer && trainer.specializationList.map((specialization, id) => (
+                                    {trainer.specializationList.map((specialization, id) => (
                                         <Col md={6} lg={3} key={id} className="specialization-col">
                                             <div className="specialization-item">
                                                 {specialization.name}
@@ -132,29 +133,34 @@ const Profile = () => {
                             <Row className="justify-content-md-center">
                                 <Col md={6}>
                                     <h2>Opinions</h2>
-                                    {comments.map((comment, index) => (
-                                        <div key={index} className="opinion-item">
-                                            <strong>{comment.name}</strong>: {comment.message} <br/>
-                                            <small>{comment.date}</small>
+                                    {opinions.map((opinion, id) => (
+                                        <div key={id} className="opinion-item">
+                                            <strong>User</strong>: {opinion.comment} <br/>
+                                            <small>Rating: {opinion.score}</small>
                                         </div>
                                     ))}
                                     <Form onSubmit={handleSubmit} className="opinion-form">
                                         <Form.Group className="opinion-name mb-3">
                                             <Form.Control
-                                                type="text"
-                                                name="name"
-                                                placeholder="Your name"
-                                                value={newComment.name}
-                                                onChange={(e) => setNewComment({ ...newComment, name: e.target.value })}
-                                            />
+                                                as="select"
+                                                name="score"
+                                                value={newOpinion.score}
+                                                onChange={(e) => setNewOpinion({ ...newOpinion, score: e.target.value })}>
+                                                <option value="">Select a score</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </Form.Control>
                                         </Form.Group>
                                         <Form.Group className="opinion-content mb-3">
                                             <Form.Control
                                                 as="textarea"
                                                 name="message"
                                                 placeholder="Write your opinion here..."
-                                                value={newComment.message}
-                                                onChange={(e) => setNewComment({ ...newComment, message: e.target.value })}
+                                                value={newOpinion.comment}
+                                                onChange={(e) => setNewOpinion({ ...newOpinion, comment: e.target.value })}
                                             />
                                         </Form.Group>
                                         <Button

@@ -15,6 +15,7 @@ import Plan from "./components/plan/Plan";
 import Trainers from "./components/trainers/Trainers";
 import Footer from "./components/footer/Footer";
 import Contact from "./components/contact/Contact";
+import UserProfile from "./components/userProfile/UserProfile";
 
 
 
@@ -30,6 +31,7 @@ root.render(
               <Route path="/login" element={<Login/>} />
               <Route path="/plan" element={<Plan/>} />
               <Route path="/profile/:trainer" element={<Profile/>} />
+              <Route path="/user/:user" element={<UserProfile/>} />
               <Route path="/trainers" element={<Trainers/>} />
               <Route path="/footer" element={<Footer/>} />
               <Route path="/contact" element={<Contact/>} />

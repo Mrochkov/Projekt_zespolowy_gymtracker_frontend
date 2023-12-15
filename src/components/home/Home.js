@@ -4,7 +4,7 @@ import "./home.css";
 import cbum from "../images/cbum.jpg";
 import Footer from "../footer/Footer";
 import Trainers from "../trainers/Trainers";
-const Home = ({trainers}) => {
+const Home = () => {
 
 
 
@@ -38,7 +38,6 @@ const Home = ({trainers}) => {
                 </div>
             </div>
             <Footer/>
-            <Trainers trainers={trainers}/>
         </div>
 
     );

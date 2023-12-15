@@ -38,7 +38,7 @@ const Navbar = () => {
                 <a className="nav-link mx-2" href="profile">Groups</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link mx-2" href="trainers">Trainers</a>
+                <a className="nav-link mx-2" href="/trainers">Trainers</a>
               </li>
             </ul>
             <ul className="navbar-nav justify-content-end">
