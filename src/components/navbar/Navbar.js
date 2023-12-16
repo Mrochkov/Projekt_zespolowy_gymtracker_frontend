@@ -34,10 +34,10 @@ const Navbar = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link mx-2" href="/profile/1">Profile</a>
+                <a className="nav-link mx-2" href='/profile/${id}'>TrainerProfile</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link mx-2" href="user/1">UserProfile</a>
+                <a className="nav-link mx-2" href='/user/${id}'>UserProfile</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link mx-2" href="/trainers">Trainers</a>

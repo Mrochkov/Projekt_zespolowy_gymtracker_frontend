@@ -141,11 +141,17 @@
 .specialization-item {
     background-color: #f0f0f0;
     border-radius: 15px;
-    padding: 2px;
+    padding: 10px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     transition: transform 0.3s ease-in-out;
     color: #1a1a1a;
+
+    min-width: 100px;
+    min-height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .specialization-item:hover {

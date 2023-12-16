@@ -134,7 +134,7 @@ const Profile = () => {
                                     <h2>Opinions</h2>
                                     {opinions.map((opinion, id) => (
                                         <div key={id} className="opinion-item">
-                                            <strong>User</strong>: {opinion.comment} <br/>
+                                            <strong>Krzysiek</strong>: {opinion.comment} <br/>
                                             <small>Rating: {opinion.score}</small>
                                         </div>
                                     ))}

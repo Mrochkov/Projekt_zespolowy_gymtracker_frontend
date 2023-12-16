@@ -106,7 +106,6 @@ class WorkoutTable extends Component {
                         </Form.Group>
                     </Col>
                 </Row>
-                <Button variant="success mt-3 ml-2" type="submit" >Submit Workout</Button>
             </Form>
         ));
     };
@@ -119,6 +118,7 @@ class WorkoutTable extends Component {
                 <Navbar/>
                 <div className="container-workout">
                     <h1>Your current workout</h1>
+                    <Button variant="primary mt-3" onClick={() => this.setState({ showModal: true })}>Select Exercise</Button>
 
                     {workout.exercises.map((exercise, index) => (
                         <Card className="mt-4" bg="dark" text="white" key={index}>
@@ -142,7 +142,16 @@ class WorkoutTable extends Component {
                         </Card>
                     )}
 
-                    <Button variant="primary mt-3" onClick={() => this.setState({ showModal: true })}>Select Exercise</Button>
+                    <Form.Group className="mt-3">
+                        <Form.Label><strong>Workout Comment</strong></Form.Label>
+                        <Form.Control
+                            className="workout-comment"
+                            as="textarea"
+                            rows={3}
+                            placeholder="Enter any comments about the workout"
+                        />
+                    </Form.Group>
+
                     <Button variant="success mt-3 ml-2" type="submit" >Submit Workout</Button>
 
                     <Modal show={showModal} onHide={() => this.setState({ showModal: false })}>

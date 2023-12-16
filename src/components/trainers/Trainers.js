@@ -70,9 +70,9 @@ const Trainers = () => {
                                 <Card className="trainer-card">
                                     <Card.Body>
                                         <Card.Img variant="top" src={getImagePath(trainer.image)} className="trainer-image" />
-                                        <Card.Title>{trainer.name}</Card.Title>
-                                        <Card.Text className="trainer-surname">{trainer.surname}</Card.Text>
-                                        <Card.Text className="trainer-surname">{trainer.score}</Card.Text>
+                                        <Card.Title><strong>{trainer.name}</strong></Card.Title>
+                                        <Card.Text className="trainer-surname">Price: {trainer.hourlyRate} zł/h</Card.Text>
+                                        <Card.Text className="trainer-surname">Rating: {trainer.score}</Card.Text>
 
                                         <Button
                                             variant="primary"

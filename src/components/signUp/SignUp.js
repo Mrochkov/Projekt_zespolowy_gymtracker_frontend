@@ -6,7 +6,7 @@ import Navbar from "../navbar/Navbar";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from "axios";
-import background from "../images/background.jpg";
+import background from "../images/background.png";
 import Footer from "../footer/Footer";
 
 const SignUp = () => {

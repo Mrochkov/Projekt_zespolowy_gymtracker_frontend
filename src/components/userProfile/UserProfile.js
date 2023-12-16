@@ -7,7 +7,7 @@ import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
 import Footer from "../footer/Footer";
 import {useLocation} from "react-router-dom";
 import api from "../../api/axiosConfig";
-import pop from "../images/1.png";
+import pop from "../images/2.png";
 import workoutTable from "../table/WorkoutTable";
 
 const UserProfile = () => {
@@ -128,16 +128,19 @@ const UserProfile = () => {
                                     <div className="profile-details">
                                         <h1 className="name">{user.name}</h1>
                                         <p className="location">{user.surname}</p>
-                                        <h2 className="about">Current trainer</h2>
+                                        <h3 className="about">Current trainer</h3>
+                                        <p className="location">{user.trainer.name}</p>
                                         <p></p>
                                     </div>
                                 </Col>
                                 <Col md={8}>
-                                    <h3 className="profile-stats-header">Gym Stats</h3>
+                                    <h2 className="profile-stats-header">Gym Stats</h2>
                                     <div className="profile-stats-details">
-                                        <p><strong>Workout Count: 3</strong> {}</p>
-                                        <p><strong>Total Volume: 15 000</strong> {} kg</p>
-                                        <p><strong>Leg Days Skipped: 3</strong> {}</p>
+                                        <p><strong>Workout Count: </strong> 2</p>
+                                        <p><strong>Total Volume: </strong>15 000 kg</p>
+                                        <p><strong>Time spent training: </strong>5 hours</p>
+                                        <p><strong>Total amout of sets: </strong>25</p>
+
                                     </div>
                                 </Col>
                             </Row>
@@ -145,14 +148,14 @@ const UserProfile = () => {
 
                         <div className="profile-workouts">
                             <Col md={12} className="profile-workout-list">
-                                <h3>Workout History</h3>
+                                <h3 className="mb-3">Workout History</h3>
                                 {
                                     workouts && workouts.map((workout, id) => (
-                                    <Card key={id} className="mb-3">
+                                    <Card key={id} className="profile-workout-container mb-3">
                                         <Card.Body className="profile-workout-cards" onClick={() => toggleWorkoutDetails(workout.id)}>
-                                            <Card.Title>{workout.name} | {workout.beginning_time}</Card.Title>
+                                            <Card.Title>{workout.name} | Volume: {workout.feedback}</Card.Title>
                                             <Card.Text>
-                                                Total Volume: {workout.comment} kg | Total Sets: {workout.feedback}
+                                                Comment: {workout.comment}  | Total Sets: {workout.feedback}
                                             </Card.Text>
                                             <Card.Text className="profile-workout-card-details">
                                                 Click to show more details about this workout!
