@@ -7,7 +7,6 @@ import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
 import Footer from "../footer/Footer";
 import {useLocation} from "react-router-dom";
 import api from "../../api/axiosConfig";
-import cbum from "../images/cbum.jpg";
 
 const Profile = () => {
 

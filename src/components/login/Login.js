@@ -11,7 +11,7 @@ const SignUp = () => {
     return (
         <div>
             <Navbar/>
-            <div className="homeLogin">
+            <div className="home-login">
                 <h1 className="login-header">
                     Welcome back!
                 </h1>

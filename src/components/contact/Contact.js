@@ -14,8 +14,9 @@ const Contact = () => {
     return (
         <div>
             <Navbar/>
+
             <div className="messenger-container">
-                <h1 className="header">Conversation with (TrainerName) </h1>
+                <h1 className="header">Conversation with </h1>
                 <Card style={{ width: '500px', marginTop: '40px' }}>
                     <Card.Header className="conversation-window">Conversation</Card.Header>
                     <ListGroup variant="flush">

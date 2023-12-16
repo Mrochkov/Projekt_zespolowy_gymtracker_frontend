@@ -6,6 +6,8 @@ import Navbar from "../navbar/Navbar";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from "axios";
+import background from "../images/background.jpg";
+import Footer from "../footer/Footer";
 
 const SignUp = () => {
     const [user, setUser] = useState({
@@ -22,14 +24,8 @@ const SignUp = () => {
     const { username, email, password, name, surname, phoneNumber, gender, birthday } = user;
 
     const onInputChange = (e) => {
-        setUser({ ...user, [e.target.username]: e.target.value });
-        setUser({ ...user, [e.target.email]: e.target.value });
-        setUser({ ...user, [e.target.password]: e.target.value });
         setUser({ ...user, [e.target.name]: e.target.value });
-        setUser({ ...user, [e.target.surname]: e.target.value });
-        setUser({ ...user, [e.target.phoneNumber]: e.target.value });
-        setUser({ ...user, [e.target.gender]: e.target.value });
-        setUser({ ...user, [e.target.birthday]: e.target.value });
+
     };
 
     const onSubmit = async (e) => {
@@ -47,52 +43,52 @@ const SignUp = () => {
                 </h1>
                 <div className="form-container">
                     <h2 className="header">Sign up down here</h2>
-                    <Form onSubmit={(e) => onSubmit(e)}>
+                    <Form className="signup-card" onSubmit={(e) => onSubmit(e)}>
                         <Row>
                             <Col md={6}>
                                 <Form.Group className="mb-3" controlId="formBasicName">
                                     <Form.Label>Username</Form.Label>
                                     <Form.Control value={username} name="username" type="text" placeholder="Enter username"
-                                                  onChange={onInputChange}/>
+                                                  onChange={(e)=>{onInputChange(e)}}/>
                                 </Form.Group>
                             </Col>
                             <Col md={6}>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Label>Email</Form.Label>
                                     <Form.Control value={email} name="email" type="email" placeholder="Enter email"
-                                                  onChange={onInputChange}/>
+                                                  onChange={(e)=>{onInputChange(e)}}/>
                                 </Form.Group>
                             </Col>
                         </Row>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control value={password} name="password" type="password" placeholder="Password"
-                                          onChange={onInputChange}/>
+                                          onChange={(e)=>{onInputChange(e)}}/>
                         </Form.Group>
                         <Row>
                             <Col md={6}>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Name</Form.Label>
                                     <Form.Control value={name} name="name" type="text" placeholder="Enter name"
-                                                  onChange={onInputChange}/>
+                                                  onChange={(e)=>{onInputChange(e)}}/>
                                 </Form.Group>
                             </Col>
                             <Col md={6}>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Surname</Form.Label>
                                     <Form.Control value={surname} name="surname" type="text" placeholder="Enter surname"
-                                                  onChange={onInputChange}/>
+                                                  onChange={(e)=>{onInputChange(e)}}/>
                                 </Form.Group>
                             </Col>
                         </Row>
                         <Form.Group className="mb-3">
                             <Form.Label>Phone Number</Form.Label>
                             <Form.Control value={phoneNumber} name="phoneNumber" type="tel" placeholder="Enter phone number"
-                                          onChange={onInputChange}/>
+                                          onChange={(e)=>{onInputChange(e)}}/>
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Gender</Form.Label>
-                            <Form.Control value={gender} name="gender" as="select" onChange={onInputChange}>
+                            <Form.Control className="gender-dropdown" value={gender} name="gender" as="select" onChange={(e)=>{onInputChange(e)}}>
                                 <option value="">Select Gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
@@ -101,7 +97,7 @@ const SignUp = () => {
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Birthday</Form.Label>
-                            <Form.Control value={birthday} name="birthday" type="date" onChange={onInputChange}/>
+                            <Form.Control value={birthday} name="birthday" type="date" onChange={(e)=>{onInputChange(e)}}/>
                         </Form.Group>
 
                         <div className="button-wrapper">
@@ -112,6 +108,7 @@ const SignUp = () => {
                     </Form>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 }

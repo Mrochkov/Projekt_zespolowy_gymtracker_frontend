@@ -1,6 +1,7 @@
 .home-signup {
+    position: relative;
     color: white;
-    background-color: #1a1a1a;
+    background-image: url('../images/background.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -8,6 +9,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
+}
+
+.home-signup::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1;
 }
 
 .signup-header {
@@ -15,11 +28,15 @@
     color: white;
     margin-bottom: 2rem;
     text-align: center;
+    position: relative;
+    z-index: 2;
 }
 
 .form-container {
+    position: relative;
+    z-index: 2;
     margin-top: 50px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.9);
     padding: 2rem;
     border-radius: 0.5rem;
     border: 1px solid rgba(255, 255, 255, 0.25);
@@ -38,7 +55,7 @@
 .form-container .form-control {
     background: rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.25);
-    color: white;
+    color: dimgrey;
     margin-bottom: 1rem;
 }
 
@@ -66,4 +83,39 @@
     display: flex;
     justify-content: center;
     margin-top: 1rem;
+}
+
+.signup-card {
+
+}
+
+.gender-dropdown {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+
+.gender-dropdown option {
+    background-color: black;
+    color: white;
+}
+
+.gender-dropdown:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 white;
+}
+
+.gender-dropdown::-ms-expand {
+    display: none;
+}
+
+.gender-dropdown:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+}
+
+.gender-dropdown:focus,
+.gender-dropdown:active {
+    background-color: black;
+    color: white;
 }
