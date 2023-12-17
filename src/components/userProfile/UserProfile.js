@@ -1,54 +1,32 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './userProfile.css';
 import Navbar from "../navbar/Navbar";
-import { Button, Form, Row, Col, Card } from "react-bootstrap";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
+import { Button, Card, Row, Col } from "react-bootstrap";
 import Footer from "../footer/Footer";
-import {useLocation} from "react-router-dom";
 import api from "../../api/axiosConfig";
 import pop from "../images/2.png";
-import workoutTable from "../table/WorkoutTable";
 
 const UserProfile = () => {
-
     const userId = 1;
-
-    /*
-    useEffect(() => {
-       api.get("/trainer",{params: {id: trainerId}}).then((response)=> {setTrainer(response.data)});
-    },[]);
-
-
-     */
-    const [user, setUsers] = useState(null);
-
-    const getUsers = async () => {
-        try {
-            api.get(`/user/${userId}`)
-                .then(response => {
-                    setUsers(response.data);
-                })
-            api.get(`/user/${userId}/workouts`)
-                .then(response => {
-                    setWorkouts(response.data);
-                })
-        } catch(err) {
-            console.log(err);
-        }
-    }
-
-    useEffect(() => {
-        getUsers();
-    }, [userId]);
-
-
+    const [user, setUser] = useState(null);
     const [expandedWorkout, setExpandedWorkout] = useState(null);
     const [workouts, setWorkouts] = useState([]);
     const [exercises, setExercises] = useState([]);
-    const [sets, setSets] = useState([]);
 
+    useEffect(() => {
+        const getUsers = async () => {
+            try {
+                const userResponse = await api.get(`/user/${userId}`);
+                setUser(userResponse.data);
 
+                const workoutResponse = await api.get(`/user/${userId}/workouts`);
+                setWorkouts(workoutResponse.data);
+            } catch(err) {
+                console.log(err);
+            }
+        };
+        getUsers();
+    }, [userId]);
 
     const toggleWorkoutDetails = async (id) => {
         if (expandedWorkout === id) {
@@ -69,125 +47,104 @@ const UserProfile = () => {
         }
     };
 
-    const sampleWorkouts = [
-        {
-            id: 1,
-            title: "Push Day",
-            date: "2023-03-01",
-            totalVolume: 8000,
-            totalSets: 20,
-            exercises: [
-                { name: "Bench Press", sets: 5, reps: 8, weight: "100kg" },
-                { name: "Shoulder Press", sets: 4, reps: 10, weight: "60kg" },
-                { name: "Tricep Dips", sets: 3, reps: 12, weight: "Bodyweight" }
-            ]
-        },
-        {
-            id: 2,
-            title: "Pull Day",
-            date: "2023-03-04",
-            totalVolume: 7500,
-            totalSets: 18,
-            exercises: [
-                { name: "Deadlift", sets: 5, reps: 5, weight: "120kg" },
-                { name: "Pull-ups", sets: 5, reps: 10, weight: "Bodyweight" },
-                { name: "Barbell Rows", sets: 4, reps: 8, weight: "80kg" }
-            ]
-        },
-        {
-            id: 3,
-            title: "Leg Day",
-            date: "2023-03-08",
-            totalVolume: 8200,
-            totalSets: 22,
-            exercises: [
-                { name: "Squats", sets: 6, reps: 6, weight: "110kg" },
-                { name: "Leg Press", sets: 5, reps: 10, weight: "200kg" },
-                { name: "Lunges", sets: 4, reps: 12, weight: "40kg" }
-            ]
-        }
-    ];
-
-    //const trainer = location.state.trainer;
-/*
-    const getImagePath = (image) => {
-        return require(`../images/${image}`);
-    };
- */
-
     return (
-        <div>
-            <div>
-                <Navbar/>
-                <div className="profile-background">
-                    <div className="profile-container larger-profile">
-                        {user && (
-                            <Row className="profile-row">
-                                <Col md={4} className="profile-picture-col">
-                                    <img src={pop} alt="Profile" className="profile-picture"/>
-                                    <div className="profile-details">
-                                        <h1 className="name">{user.name}</h1>
+        <div className="user-main-container">
+            <Navbar/>
+            <div className="user-profile-background">
+                <div className="user-profile-container larger-profile">
+
+                    {user && (
+                        <Row className="user-profile-row">
+                            <Col md={4} className="user-profile-picture-col">
+                                <Card>
+                                    <Card.Body className="p-5">
+                                        <img src={pop} alt="Profile" className="user-profile-picture"/>
+                                        <h1 className="user-info">{user.name}</h1>
                                         <p className="location">{user.surname}</p>
-                                        <h3 className="about">Current trainer</h3>
-                                        <p className="location">{user.trainer.name}</p>
-                                        <p></p>
-                                    </div>
-                                </Col>
-                                <Col md={8}>
-                                    <h2 className="profile-stats-header">Gym Stats</h2>
-                                    <div className="profile-stats-details">
-                                        <p><strong>Workout Count: </strong> 2</p>
-                                        <p><strong>Total Volume: </strong>15 000 kg</p>
-                                        <p><strong>Time spent training: </strong>5 hours</p>
-                                        <p><strong>Total amout of sets: </strong>25</p>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
 
-                                    </div>
-                                </Col>
-                            </Row>
-                        )}
+                            <Col md={8} className="user-profile-d">
+                                <Card>
+                                    <Card.Body className="p-5">
+                                        <div className="user-profile-details">
+                                            <h3 className="user-info">Current trainer</h3>
+                                            <p className="location">{user.trainer.name}</p>
+                                            <h3 className="user-info">Gender</h3>
+                                            <p className="location">{user.gender}</p>
+                                        </div>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        </Row>
+                    )}
 
-                        <div className="profile-workouts">
-                            <Col md={12} className="profile-workout-list">
-                                <h3 className="mb-3">Workout History</h3>
-                                {
-                                    workouts && workouts.map((workout, id) => (
-                                    <Card key={id} className="profile-workout-container mb-3">
-                                        <Card.Body className="profile-workout-cards" onClick={() => toggleWorkoutDetails(workout.id)}>
-                                            <Card.Title>{workout.name} | Volume: {workout.feedback}</Card.Title>
-                                            <Card.Text>
-                                                Comment: {workout.comment}  | Total Sets: {workout.feedback}
-                                            </Card.Text>
-                                            <Card.Text className="profile-workout-card-details">
-                                                Click to show more details about this workout!
-                                            </Card.Text>
-                                                {expandedWorkout === workout.id && (
-                                                    <div className="workout-details">
-                                                        {exercises.map((exercise, id) => (
-                                                            <div key={exercise.id}>
-                                                                <strong>Exercise name: {exercise.name}</strong>
-                                                                {exercise.sets.map((set, id) => (
-                                                                    <p key={set.id}>
-                                                                        Set: {set.id}, Reps: {set.reps}, Weight: {set.weight} kg
-                                                                    </p>
-                                                                ))}
-                                                            </div>
+                    <div className="gym-stats-section mb-4">
+                        <Card>
+                            <Card.Body>
+                                <Row>
+                                    <h2 className="user-profile-stats-header text-center">Gym Stats</h2>
+
+                                    <Col md={3} className="gym-stat-item">
+                                        <h5>Workout Count</h5>
+                                        <p className="stat-value">2</p>
+                                    </Col>
+                                    <Col md={3} className="gym-stat-item">
+                                        <h5>Total Volume</h5>
+                                        <p className="stat-value">15 000 kg</p>
+                                    </Col>
+                                    <Col md={3} className="gym-stat-item">
+                                        <h5>Time Spent Training</h5>
+                                        <p className="stat-value">5 hours</p>
+                                    </Col>
+                                    <Col md={3} className="gym-stat-item">
+                                        <h5>Total Amount of Sets</h5>
+                                        <p className="stat-value">25</p>
+                                    </Col>
+                                </Row>
+                            </Card.Body>
+                        </Card>
+                    </div>
+
+
+                    <Card>
+                        <Card.Body>
+                            <h3 className="user-workout-history-title mb-3">Workout History</h3>
+                            {workouts && workouts.map((workout, id) => (
+                                <Card key={id} className="user-profile-workout-container mb-3">
+                                    <Card.Body className="user-profile-workout-cards" onClick={() => toggleWorkoutDetails(workout.id)}>
+                                        <Card.Title>{workout.name}</Card.Title>
+                                        <Card.Text>
+                                            Comment: {workout.comment}
+                                        </Card.Text>
+                                        <Card.Text className="user-profile-workout-card-details">
+                                            Click to show more details about this workout!
+                                        </Card.Text>
+                                        {expandedWorkout === workout.id && (
+                                            <div className="user-workout-details">
+                                                {exercises.map((exercise, id) => (
+                                                    <div  key={exercise.id} className="user-workout-details-exercise" >
+                                                        <strong>Exercise name: {exercise.name}</strong>
+                                                        {exercise.sets.map((set, idx) => (
+                                                            <p key={set.id} className="user-workout-details-exercise-sets" >
+                                                                Set: {idx + 1}, Reps: {set.reps}, Weight: {set.weight} kg
+                                                            </p>
                                                         ))}
                                                     </div>
-                                                )}
-
-                                        </Card.Body>
-                                    </Card>
-                                ))}
-                            </Col>
-                        </div>
-
-                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </Card.Body>
+                                </Card>
+                            ))}
+                        </Card.Body>
+                    </Card>
                 </div>
             </div>
             <Footer/>
         </div>
     );
 };
-
 
 export default UserProfile;

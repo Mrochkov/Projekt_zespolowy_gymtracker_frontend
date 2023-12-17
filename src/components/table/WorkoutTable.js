@@ -4,6 +4,7 @@ import Navbar from "../navbar/Navbar";
 import './table.css';
 import Footer from "../footer/Footer";
 import axios from "axios";
+import SelectInput from "@mui/material/Select/SelectInput";
 
 class WorkoutTable extends Component {
     constructor(props) {
@@ -19,9 +20,9 @@ class WorkoutTable extends Component {
 
             workout: {
                 userId: 1,
-                comment: 'comment',
+                comment: '',
                 exercises: [],
-                name: 'FBW'
+                name: ''
             }
         };
 
@@ -67,9 +68,10 @@ class WorkoutTable extends Component {
         }));
     };
 
+
     renderSets = (sets, isDisabled) => {
         return sets.map((set, index) => (
-            <Form onSubmit={(e) => this.onSubmit(e)}>
+            <Form id='workoutForm' onSubmit={(e) => this.onSubmit(e)}>
                 <Row key={set.setId}>
                     <Col md={2}>
                         <Form.Group controlId={`formSetIndex-${set.setId}` }>
@@ -118,6 +120,7 @@ class WorkoutTable extends Component {
                 <Navbar/>
                 <div className="container-workout">
                     <h1>Your current workout</h1>
+                    <p>Select exercise below. After the exercise is finished click "submit exercise"</p>
                     <Button variant="primary mt-3" onClick={() => this.setState({ showModal: true })}>Select Exercise</Button>
 
                     {workout.exercises.map((exercise, index) => (
@@ -142,17 +145,31 @@ class WorkoutTable extends Component {
                         </Card>
                     )}
 
-                    <Form.Group className="mt-3">
+                    <Form.Group className="workout-title my-3 mt-4">
+                        <Form.Label><strong>Title</strong></Form.Label>
+                        <Form.Control
+                            value={workout.name}
+                            name="name"
+                            type="text"
+                            placeholder="Enter workout title..."
+                            onChange={e => this.setState({ workout: { ...workout, name: e.target.value } })}
+                        />
+                    </Form.Group>
+
+                    <Form.Group id='workoutForm' className="mt-3">
                         <Form.Label><strong>Workout Comment</strong></Form.Label>
                         <Form.Control
                             className="workout-comment"
                             as="textarea"
                             rows={3}
+                            value={workout.comment}
                             placeholder="Enter any comments about the workout"
+                            onChange={e => this.setState({ workout: { ...workout, comment: e.target.value } })}
                         />
                     </Form.Group>
 
-                    <Button variant="success mt-3 ml-2" type="submit" >Submit Workout</Button>
+
+                    <Button form='workoutForm' variant="success mt-3 ml-2" type="submit" >Submit Workout</Button>
 
                     <Modal show={showModal} onHide={() => this.setState({ showModal: false })}>
                         <Modal.Header closeButton>

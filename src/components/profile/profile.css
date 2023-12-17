@@ -26,12 +26,10 @@
 }
 
 .profile-container {
-    background-color: #333;
     border-radius: 10px;
     padding: 30px;
     max-width: 65vw;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     margin-bottom: 20px;
 }
 
@@ -57,15 +55,22 @@
 .profile-picture-grid {
 
 }
+
+.profile-picture-card {
+    min-height: 68.5vh;
+ }
 .gym-title {
     margin-top: 20px;
+}
+.gym-list-item {
+    display: inline-block;
 }
 
 .gym-col {
     margin-top: 15px;
 }
 .profile-row{
-
+    margin-top: 100px;
 }
 
 .name {
@@ -127,7 +132,7 @@
 }
 
 .profile-opinions {
-    margin-top: 100px;
+    margin-top: 30px;
 }
 
 .specializations-title {
@@ -139,16 +144,15 @@
 }
 
 .specialization-item {
-    background-color: #f0f0f0;
+    background-color: #9e9d9a;
     border-radius: 15px;
-    padding: 10px;
+    padding: 7px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     transition: transform 0.3s ease-in-out;
     color: #1a1a1a;
 
-    min-width: 100px;
-    min-height: 70px;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -157,4 +161,32 @@
 .specialization-item:hover {
     transform: translateY(-10px);
     background-color: #e7e7e7;
+}
+.profile-about {
+    max-width: 73.2vh;
+
+}
+.profile-about-card {
+    min-height: 68.5vh;
+}
+.gym-list-card {
+
+}
+
+.name-trainer {
+    color: antiquewhite;
+}
+.gym-name {
+    color: cadetblue;
+}
+.gym-address {
+    color: lightgrey;
+}
+
+.rating-text {
+    color: lightgrey;
+}
+
+.comment-name {
+    color: #bab798;
 }

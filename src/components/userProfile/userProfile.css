@@ -1,51 +1,38 @@
-.profile-background {
+.user-main-container {
+    background-image: url('../images/background.png');
+
+}
+
+.user-profile-background {
+    margin-top: 80px;
     color: white;
-    background-color: #1a1a1a;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
-.rating-icon {
-    color: #ddd;
-    margin-right: 12px;
-    font-size: 40px;
+.user-profile-container {
+    border-radius: 100px;
+    padding: 20px;
+    max-width: 60vw;
+    text-align: center;
     margin-bottom: 20px;
 }
 
-.rating-icon.active {
-    color: #fcb800;
-}
-
-
-.profile-experience{
-    text-align: center;
-    margin-top: 60px;
-}
-
-.profile-container {
-    background-color: #333;
-    border-radius: 10px;
-    padding: 30px;
-    max-width: 65vw;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    margin-bottom: 20px;
-}
-
-.profile-container-wrapper{
+.user-profile-container-wrapper{
     margin-top: 20px;
 }
 
+.user-profile-row {
+    min-width: 100vh;
+}
 
-.profile-header {
+.user-profile-header {
     margin-bottom: 20px;
     text-align: left;
 }
 
-.profile-picture {
+.user-profile-picture {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -53,18 +40,10 @@
     margin-bottom: 15px;
     border: 3px solid white;
 }
-
-.profile-picture-grid {
-
-}
-.gym-title {
-    margin-top: 20px;
+.user-profile-picture-col {
 }
 
-.gym-col {
-    margin-top: 15px;
-}
-.profile-row{
+.user-profile-picture-grid {
 
 }
 
@@ -73,23 +52,21 @@
     margin-bottom: 5px;
 }
 
-.location {
-    font-style: italic;
-    color: #ccc;
-}
 
-.profile-details {
+.user-profile-details {
     text-align: center;
-    font-size: 20px;
+    font-size: 22px;
+    min-height: 31.5vh;
+
 }
 
-.gyms{
+.user-info {
+    color: antiquewhite;
 }
 
 .about{
-    margin-top: 40px;
-
 }
+
 .btn-primary {
     background-color: whitesmoke;
     border-color: #333;
@@ -104,18 +81,53 @@
 }
 
 
-.profile-workout-cards {
+.user-profile-workout-cards {
     color: darkgrey;
 }
 
-.profile-workout-card-details {
+.user-profile-workout-card-details {
     color: indianred;
 }
-
-.profile-stats-details {
-    margin-top: 60px;
+.user-profile-workout-container {
+    background-color: rgb(36, 36, 36, 0.9);
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
 }
 
-.profile-workout-list {
 
+.user-profile-stats-details {
+    color: tan;
+}
+.gym-stat-item {
+    color: cadetblue;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.user-profile-stats-header{
+    color: skyblue;
+    margin-top: 15px;
+    justify-content: center;
+    display: flex;
+}
+.user-profile-workout-list {
+
+}
+.user-workout-history-title{
+    color: antiquewhite;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.user-workout-details-exercise {
+    color: #12a300;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
+.user-workout-details-exercise-sets {
+    color: darkgrey;
+    margin-top: 20px;
+    font-size: 17px;
+    padding-top: 5px;
 }

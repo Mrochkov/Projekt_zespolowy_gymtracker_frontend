@@ -18,7 +18,7 @@ const SignUp = () => {
         surname: "",
         phoneNumber: "",
         gender: "",
-        birthday: ""
+        birthday: Date
     });
 
     const { username, email, password, name, surname, phoneNumber, gender, birthday } = user;
@@ -31,7 +31,19 @@ const SignUp = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         console.log(user, "POSTED :>");
-        await axios.post("http://127.0.0.1:8080/users/signup", user);
+        await axios.post("http://127.0.0.1:8080/signup", user).catch(function (error) {
+            if (error.response) {
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                alert(error.response.data.message)
+            } else if (error.request) {
+                console.log(error.request);
+            } else {
+                console.log('Error', error.message);
+            }
+            console.log(error.config);
+        });
     };
 
     return (

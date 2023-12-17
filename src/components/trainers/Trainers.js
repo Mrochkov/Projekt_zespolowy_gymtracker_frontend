@@ -63,6 +63,7 @@ const Trainers = () => {
             <div className="trainers-background">
                 <div className="trainers-container">
                     <h1 className="header">Choose a trainer</h1>
+                    <div className="container">
                     <Row>
                         {
                             trainers && trainers.map((trainer, id) => (
@@ -86,6 +87,7 @@ const Trainers = () => {
                             </Col>
                         ))}
                     </Row>
+                    </div>
                 </div>
             </div>
             <Footer/>

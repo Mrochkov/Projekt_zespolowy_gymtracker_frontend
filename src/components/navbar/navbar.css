@@ -5,5 +5,5 @@
 }
 .navbar-nav{
     text-align: center;
-
+    display: flex;
 }
