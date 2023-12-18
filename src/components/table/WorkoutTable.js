@@ -20,7 +20,7 @@ class WorkoutTable extends Component {
             },
 
             workout: {
-                userId: 1,
+                userId: [],
                 comment: '',
                 exercises: [],
                 name: ''
@@ -30,18 +30,30 @@ class WorkoutTable extends Component {
 
     }
 
-    componentDidMount() {
-        api.get('/exercise/names')
-            .then(response => {
-                this.setState({ exercises: response.data });
-            })
-            .catch(err => {
-                console.log(err);
-            });
+    async componentDidMount() {
+        try {
+            api.get('/exercise/names')
+                .then(response => {
+                    this.setState({ exercises: response.data });
+                })
+
+            const userResponse = await api.get('/user');
+            if (!userResponse.data) {
+                window.location = '/login';
+                return;
+            }
+
+            this.state.workout.userId = userResponse.data.id;
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            window.location = '/login';
+        }
     }
 
     onSubmit = async (e) => {
         e.preventDefault();
+
         console.log(this.state.workout)
         //await axios.post("http://127.0.0.1:8080/workout", this.state.workout).
         await axios.post("http://127.0.0.1:8080/workout", { data: JSON.stringify(this.state.workout),headers: {'Content-Type': 'application/json;'}}).
@@ -82,6 +94,7 @@ class WorkoutTable extends Component {
 
 
     renderSets = (sets, isDisabled) => {
+
 
         return sets.map((set, index) => (
             <Form id='workoutForm' onSubmit={(e) => this.onSubmit(e)}>

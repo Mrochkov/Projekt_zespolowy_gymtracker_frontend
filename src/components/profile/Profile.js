@@ -7,12 +7,14 @@ import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
 import Footer from "../footer/Footer";
 import {useLocation} from "react-router-dom";
 import api from "../../api/axiosConfig";
+import axios from "axios";
 
 const Profile = () => {
 
     const { state } = useLocation();
     const trainerId = state ? state.id : null;
     const [trainer, setTrainer] = useState(null);
+    const [user, setUser] = useState(null);
 
     /*
     useEffect(() => {
@@ -24,15 +26,21 @@ const Profile = () => {
 
     const [opinions, setOpinions] = useState([]);
 
-    const [newOpinion, setNewOpinion] = useState({ score: "", comment: "" });
+    const [newOpinion, setNewOpinion] = useState({ score: "", comment: "",trainerId: "",userId:"" });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setNewOpinion({ score: "", comment: "" });
+        setNewOpinion({ score: "", comment: "",trainerId: "",userId: ""});
     };
 
     useEffect(() => {
         if (trainerId) {
+
+            api.get(`/user`)
+                .then(response => {
+                    setUser(response.data);
+                    newOpinion.userId = response.data.id;
+                })
             api.get("/trainer", { params: { id: trainerId } })
                 .then((response) => {
                     setTrainer(response.data);
@@ -60,6 +68,16 @@ const Profile = () => {
         return rating;
     };
 
+    const onSubmit = async (e) => {
+        e.preventDefault();
+
+       // await axios.post("http://127.0.0.1:8080/opinion", JSON.stringify(newOpinion)).
+        console.log(newOpinion)
+        newOpinion.trainerId = trainerId;
+        await axios.post("http://127.0.0.1:8080/opinion", { data: JSON.stringify(newOpinion),headers: {'Content-Type': 'application/json;'}}).
+        then(response => {console.log(response)});
+        window.location.reload();
+    };
 
 
     //const trainer = location.state.trainer;
@@ -166,11 +184,11 @@ const Profile = () => {
                                             <h2>Opinions</h2>
                                             {opinions.map((opinion, id) => (
                                                 <div key={id} className="opinion-item">
-                                                    <strong className="comment-name">Krzysiek</strong>: {opinion.comment} <br/>
+                                                    <strong className="comment-name">User</strong>: {opinion.comment} <br/>
                                                     <small>Rating: {opinion.score}</small>
                                                 </div>
                                             ))}
-                                            <Form onSubmit={handleSubmit} className="opinion-form">
+                                            <Form onSubmit={(e) => onSubmit(e)} className="opinion-form">
                                                 <Form.Group className="opinion-name mb-3">
                                                     <Form.Control
                                                         as="select"

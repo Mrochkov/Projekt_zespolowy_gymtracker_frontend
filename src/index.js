@@ -32,7 +32,7 @@ root.render(
               <Route path="/opinion" element={<Opinions/>} />
               <Route path="/login" element={<Login/>} />
               <Route path="/plan" element={<Plan/>} />
-              <Route path="/profile" element={<Profile/>} />
+              <Route path="/profile/:trainer" element={<Profile/>} />
               <Route path="/user" element={<UserProfile/>} />
               <Route path="/trainers" element={<Trainers/>} />
               <Route path="/footer" element={<Footer/>} />

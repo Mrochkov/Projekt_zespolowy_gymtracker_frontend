@@ -16,11 +16,9 @@ const UserProfile = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Fetch user data
                 const userResponse = await api.get('/user');
                 setUser(userResponse.data);
 
-                // Fetch workouts based on the user's ID
                 const userId = userResponse.data.id;
                 const workoutResponse = await api.get(`/user/${userId}/workouts`);
                 setWorkouts(workoutResponse.data);
@@ -92,7 +90,7 @@ const UserProfile = () => {
 
                                     <Col md={3} className="gym-stat-item">
                                         <h5>Workout Count</h5>
-                                        <p className="stat-value">2</p>
+                                        <p className="stat-value">{workouts.length}</p>
                                     </Col>
                                     <Col md={3} className="gym-stat-item">
                                         <h5>Total Volume</h5>
