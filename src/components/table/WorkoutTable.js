@@ -1,10 +1,11 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import { Form, Button, Card, Col, Row, Modal } from 'react-bootstrap';
 import Navbar from "../navbar/Navbar";
 import './table.css';
 import Footer from "../footer/Footer";
 import axios from "axios";
 import SelectInput from "@mui/material/Select/SelectInput";
+import api from "../../api/axiosConfig";
 
 class WorkoutTable extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class WorkoutTable extends Component {
 
         this.state = {
             showModal: false,
-
+            exercises: [],
             currentExercise: {
                 name: '',
                 sets: [],
@@ -28,6 +29,17 @@ class WorkoutTable extends Component {
 
 
     }
+
+    componentDidMount() {
+        api.get('/exercise/names')
+            .then(response => {
+                this.setState({ exercises: response.data });
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
     onSubmit = async (e) => {
         e.preventDefault();
         console.log(this.state.workout)
@@ -70,6 +82,7 @@ class WorkoutTable extends Component {
 
 
     renderSets = (sets, isDisabled) => {
+
         return sets.map((set, index) => (
             <Form id='workoutForm' onSubmit={(e) => this.onSubmit(e)}>
                 <Row key={set.setId}>
@@ -113,7 +126,8 @@ class WorkoutTable extends Component {
     };
 
     render() {
-        const {showModal, currentExercise, workout} = this.state;
+        const {showModal, currentExercise, workout, exercises} = this.state;
+
 
         return (
             <div>
@@ -171,6 +185,8 @@ class WorkoutTable extends Component {
 
                     <Button form='workoutForm' variant="success mt-3 ml-2" type="submit" >Submit Workout</Button>
 
+
+
                     <Modal show={showModal} onHide={() => this.setState({ showModal: false })}>
                         <Modal.Header closeButton>
                             <Modal.Title>Select an Exercise</Modal.Title>
@@ -178,12 +194,13 @@ class WorkoutTable extends Component {
                         <Modal.Body>
                             <Form.Select aria-label="Select Exercise" onChange={this.handleExerciseSelect}>
                                 <option value="">Open this select menu</option>
-                                <option value="Squats">Squats</option>
-                                <option value="Deadlift">Deadlift</option>
-                                <option value="Bench Press">Bench Press</option>
+                                {exercises.map((exercise, index) => (
+                                    <option key={index} value={exercise}>{exercise}</option>
+                                ))}
                             </Form.Select>
                         </Modal.Body>
                     </Modal>
+
                 </div>
                 <Footer/>
             </div>

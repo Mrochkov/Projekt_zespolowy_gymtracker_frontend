@@ -7,26 +7,30 @@ import api from "../../api/axiosConfig";
 import pop from "../images/2.png";
 
 const UserProfile = () => {
-    const userId = 1;
+
     const [user, setUser] = useState(null);
     const [expandedWorkout, setExpandedWorkout] = useState(null);
     const [workouts, setWorkouts] = useState([]);
     const [exercises, setExercises] = useState([]);
 
     useEffect(() => {
-        const getUsers = async () => {
+        const fetchData = async () => {
             try {
-                const userResponse = await api.get(`/user/${userId}`);
+                // Fetch user data
+                const userResponse = await api.get('/user');
                 setUser(userResponse.data);
 
+                // Fetch workouts based on the user's ID
+                const userId = userResponse.data.id;
                 const workoutResponse = await api.get(`/user/${userId}/workouts`);
                 setWorkouts(workoutResponse.data);
-            } catch(err) {
-                console.log(err);
+            } catch (error) {
+                window.location ="/login"
             }
         };
-        getUsers();
-    }, [userId]);
+
+        fetchData();
+    }, []);
 
     const toggleWorkoutDetails = async (id) => {
         if (expandedWorkout === id) {

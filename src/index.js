@@ -17,6 +17,7 @@ import Footer from "./components/footer/Footer";
 import Contact from "./components/contact/Contact";
 import UserProfile from "./components/userProfile/UserProfile";
 import AdminPanel from "./components/admin/AdminPanel";
+import TrainersWorkouts from "./components/trainersWorkouts/TrainersWorkouts";
 
 
 
@@ -31,12 +32,14 @@ root.render(
               <Route path="/opinion" element={<Opinions/>} />
               <Route path="/login" element={<Login/>} />
               <Route path="/plan" element={<Plan/>} />
-              <Route path="/profile/:trainer" element={<Profile/>} />
-              <Route path="/user/:user" element={<UserProfile/>} />
+              <Route path="/profile" element={<Profile/>} />
+              <Route path="/user" element={<UserProfile/>} />
               <Route path="/trainers" element={<Trainers/>} />
               <Route path="/footer" element={<Footer/>} />
               <Route path="/contact" element={<Contact/>} />
               <Route path="/admin" element={<AdminPanel/>} />
+              <Route path="/trainerWorkouts" element={<TrainersWorkouts/>} />
+
 
           </Routes>
 
