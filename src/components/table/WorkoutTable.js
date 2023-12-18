@@ -58,6 +58,7 @@ class WorkoutTable extends Component {
         //await axios.post("http://127.0.0.1:8080/workout", this.state.workout).
         await axios.post("http://127.0.0.1:8080/workout", { data: JSON.stringify(this.state.workout),headers: {'Content-Type': 'application/json;'}}).
         then(response => {console.log(response)});
+        window.location = "/user";
     };
 
     handleExerciseSelect = (e) => {

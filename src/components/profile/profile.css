@@ -144,7 +144,7 @@
 }
 
 .specialization-item {
-    background-color: #9e9d9a;
+    background-color: #9e9d58;
     border-radius: 15px;
     padding: 7px;
     text-align: center;
@@ -189,4 +189,7 @@
 
 .comment-name {
     color: #bab798;
+}
+.gym-list-card {
+    background-color: grey;
 }

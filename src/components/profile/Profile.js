@@ -154,10 +154,10 @@ const Profile = () => {
                         </Row>
                          )}
 
-                            <Card>
+                            <Card className="gym-card">
                                 <Card.Body>
                                     <h2 className="name-trainer mt-3 mb-4">Gyms</h2>
-                                    <Row>
+                                    <Row className="gyms-rows">
 
                                         {trainer && trainer.gymList.map((gym, id) => (
 

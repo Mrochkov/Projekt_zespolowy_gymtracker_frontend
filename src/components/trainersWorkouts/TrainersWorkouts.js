@@ -56,13 +56,13 @@ const TrainersWorkouts = () => {
 
                     <Card>
                         <Card.Body>
-                            {user && (
-                            <h1 className="workouts-header">{user.name}</h1>
-                            )}
+                            <h1 className="workouts-header">My clients workouts</h1>
+
                             <h3 className="user-workout-history-title mb-3">Workout History</h3>
                             {trainerWorkouts && trainerWorkouts.map((workout, id) => (
                                 <Card key={id} className="user-profile-workout-container mb-3">
                                     <Card.Body className="user-profile-workout-cards" onClick={() => toggleWorkoutDetails(workout.id)}>
+                                        <Card.Title>User: {workout.user_id}</Card.Title>
                                         <Card.Title>{workout.name}</Card.Title>
                                         <Card.Text>
                                             Comment: {workout.comment}
