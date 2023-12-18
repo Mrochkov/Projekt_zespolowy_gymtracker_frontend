@@ -8,25 +8,26 @@ import pop from "../images/2.png";
 
 const TrainersWorkouts = () => {
     const userId = 1;
+    const trainerId = 1;
+
     const [user, setUser] = useState(null);
     const [expandedWorkout, setExpandedWorkout] = useState(null);
-    const [workouts, setWorkouts] = useState([]);
+    const [trainerWorkouts, setTrainerWorkouts] = useState([]);
     const [exercises, setExercises] = useState([]);
 
     useEffect(() => {
         const getUsers = async () => {
             try {
-                const userResponse = await api.get(`/user/${userId}`);
-                setUser(userResponse.data);
 
-                const workoutResponse = await api.get(`/user/${userId}/workouts`);
-                setWorkouts(workoutResponse.data);
+                const workoutResponse = await api.get(`/trainer/${trainerId}/workouts`);
+                setTrainerWorkouts(workoutResponse.data);
+
             } catch(err) {
                 console.log(err);
             }
         };
         getUsers();
-    }, [userId]);
+    }, [trainerId]);
 
     const toggleWorkoutDetails = async (id) => {
         if (expandedWorkout === id) {
@@ -59,7 +60,7 @@ const TrainersWorkouts = () => {
                             <h1 className="workouts-header">{user.name}</h1>
                             )}
                             <h3 className="user-workout-history-title mb-3">Workout History</h3>
-                            {workouts && workouts.map((workout, id) => (
+                            {trainerWorkouts && trainerWorkouts.map((workout, id) => (
                                 <Card key={id} className="user-profile-workout-container mb-3">
                                     <Card.Body className="user-profile-workout-cards" onClick={() => toggleWorkoutDetails(workout.id)}>
                                         <Card.Title>{workout.name}</Card.Title>
