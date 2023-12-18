@@ -1,34 +1,61 @@
-import React from "react";
 import './login.css';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import Navbar from "../navbar/Navbar";
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Footer from "../footer/Footer";
 
-const SignUp = () => {
+
+import React, { useState } from 'react';
+import { Form, Button, Row, Col } from 'react-bootstrap';
+import axios from 'axios';
+import {redirect} from "react-router-dom";
+
+const Login = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            await axios.post('http://localhost:8080/perform_login', {
+                username,
+                password
+            });
+            window.location = "/"
+
+
+        } catch (error) {
+            alert("Provided credentials are wrong")
+        }
+    };
+
     return (
         <div>
-            <Navbar/>
             <div className="home-login">
-                <h1 className="login-header">
-                    Welcome back!
-                </h1>
+                <h1 className="login-header">Welcome back!</h1>
                 <div className="form-container">
                     <h2 className="header">Login here</h2>
-                    <Form>
+                    <Form onSubmit={onSubmit}>
                         <Row>
                             <Col md={12}>
                                 <Form.Group className="mb-3" controlId="formBasicName">
                                     <Form.Label>Username</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter username" />
+                                    <Form.Control
+                                        value={username}
+                                        type="text"
+                                        placeholder="Enter username"
+                                        onChange={(e) => setUsername(e.target.value)}
+                                    />
                                 </Form.Group>
                             </Col>
                         </Row>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control
+                                value={password}
+                                type="password"
+                                placeholder="Password"
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
                         </Form.Group>
                         <div className="button-wrapper">
                             <Button variant="primary" type="submit">
@@ -38,9 +65,8 @@ const SignUp = () => {
                     </Form>
                 </div>
             </div>
-            <Footer/>
         </div>
     );
-}
+};
 
-export default SignUp;
+export default Login;
