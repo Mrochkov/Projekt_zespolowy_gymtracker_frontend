@@ -187,21 +187,16 @@ useEffect(() => {
                         <Card.Body>
                             <h3 className="user-workout-history-title mb-3">Workout History</h3>
                             {workouts && workouts.slice().reverse().map((workout, id) => (
-
                                 <Card key={id} className="user-profile-workout-container mb-3">
                                     <Card.Body className="user-profile-workout-cards" onClick={() => toggleWorkoutDetails(workout.id)}>
-                                        <Card.Title> {workout.name}
-                                        </Card.Title>
-
-
+                                        <Card.Title> {workout.name} </Card.Title>
                                         <Card.Text>
                                             <p className="">{format(workout.beginning_time, "dd-MM-yyyy \n H:mma")}</p>
-                                             {workout.comment}
-                                        {!expandedWorkout && (
-                                            <Card.Text className="user-profile-workout-card-details">
-                                                Click to see details
-                                            </Card.Text>
-                                        )}
+                                            {!expandedWorkout && (
+                                                <Card.Text className="user-profile-workout-card-details">
+                                                    Click to see details
+                                                </Card.Text>
+                                            )}
                                         </Card.Text>
                                         {expandedWorkout === workout.id && (
                                             <div className="user-workout-details">
@@ -215,6 +210,12 @@ useEffect(() => {
                                                         ))}
                                                     </div>
                                                 ))}
+                                                <Card.Text className="card-workout-comment">
+                                                    <p className="comment">Comment</p>
+                                                    <p className="comment-label"><strong>{workout.comment}</strong></p>
+                                                    <p className="comment mt-3">Feedback</p>
+                                                    <p className="feedback-label"><strong>{workout.feedback}</strong></p>
+                                                </Card.Text>
                                             </div>
                                         )}
                                     </Card.Body>
@@ -222,6 +223,7 @@ useEffect(() => {
                             ))}
                         </Card.Body>
                     </Card>
+
                 </div>
             </div>
             <Footer/>

@@ -134,3 +134,26 @@
     padding-top: 5px;
 }
 
+
+
+.comment-label {
+    text-align: center;
+    margin-bottom: 0;
+    color: yellowgreen;
+    font-size: larger;
+
+}
+
+.centered-comment {
+    text-align: center;
+}
+.comment {
+    color: dimgrey;
+    font-size: small;
+}
+.feedback-label {
+    color: #9e603b;
+    font-size: larger;
+    margin-bottom: 0;
+    text-align: center;
+}
