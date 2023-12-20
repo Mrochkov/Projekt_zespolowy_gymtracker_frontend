@@ -23,6 +23,7 @@ const Trainers = () => {
             setTrainers(response.data);
         } catch(err) {
             console.log(err);
+            window.location = "/"
         }
     }
 

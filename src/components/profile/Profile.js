@@ -36,22 +36,26 @@ const Profile = () => {
     useEffect(() => {
         if (trainerId) {
 
+            try{
             api.get(`/user`)
                 .then(response => {
                     setUser(response.data);
                     newOpinion.userId = response.data.id;
                 })
+            }
+            catch (error) {
+                console.log("No logged user")
+            }
             api.get("/trainer", { params: { id: trainerId } })
                 .then((response) => {
                     setTrainer(response.data);
                 })
             api.get(`/trainer/${trainerId}/opinions`)
-                .then(response => {
+                .then((response) => {
                     setOpinions(response.data);
                 })
         }
     }, [trainerId]);
-
 
 
     const renderRating = () => {
@@ -184,8 +188,8 @@ const Profile = () => {
                                             <h2>Opinions</h2>
                                             {opinions.map((opinion, id) => (
                                                 <div key={id} className="opinion-item">
-                                                    <strong className="comment-name">User</strong>: {opinion.comment} <br/>
-                                                    <small>Rating: {opinion.score}</small>
+                                                    <strong className="comment-name">{opinion.user.login}</strong>: {opinion.comment} <br/>
+                                                    <small>Rating: {opinion.score}/5</small>
                                                 </div>
                                             ))}
                                             <Form onSubmit={(e) => onSubmit(e)} className="opinion-form">

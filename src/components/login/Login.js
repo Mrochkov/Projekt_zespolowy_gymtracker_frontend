@@ -20,7 +20,7 @@ const Login = () => {
                 username,
                 password
             });
-            window.location = "/"
+            window.location = "/user"
 
 
         } catch (error) {
@@ -59,7 +59,7 @@ const Login = () => {
                         </Form.Group>
                         <div className="button-wrapper">
                             <Button variant="primary" type="submit">
-                                Submit
+                               Log In
                             </Button>
                         </div>
                     </Form>

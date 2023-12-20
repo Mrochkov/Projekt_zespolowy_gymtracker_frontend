@@ -16,12 +16,12 @@ const SignUp = () => {
         password: "",
         name: "",
         surname: "",
-        phoneNumber: "",
+        phone_number: "",
         gender: "",
         birthday: Date
     });
 
-    const { username, email, password, name, surname, phoneNumber, gender, birthday } = user;
+    const { username, email, password, name, surname, phone_number, gender, birthday } = user;
 
     const onInputChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value });
@@ -40,9 +40,10 @@ const SignUp = () => {
             } else if (error.request) {
                 console.log(error.request);
             } else {
-                console.log('Error', error.message);
+                window.location = "/"
             }
-            console.log(error.config);
+
+
         });
     };
 
@@ -54,7 +55,7 @@ const SignUp = () => {
                     Become a member now!
                 </h1>
                 <div className="form-container">
-                    <h2 className="header">Sign up down here</h2>
+                    <h2 className="header">Sign up here</h2>
                     <Form className="signup-card" onSubmit={(e) => onSubmit(e)}>
                         <Row>
                             <Col md={6}>
@@ -95,7 +96,7 @@ const SignUp = () => {
                         </Row>
                         <Form.Group className="mb-3">
                             <Form.Label>Phone Number</Form.Label>
-                            <Form.Control value={phoneNumber} name="phoneNumber" type="tel" placeholder="Enter phone number"
+                            <Form.Control value={phone_number} name="phone_number" type="tel" placeholder="Enter phone number"
                                           onChange={(e)=>{onInputChange(e)}}/>
                         </Form.Group>
                         <Form.Group className="mb-3">
@@ -114,7 +115,7 @@ const SignUp = () => {
 
                         <div className="button-wrapper">
                             <Button variant="primary" type="submit">
-                                Submit
+                               Sign Up
                             </Button>
                         </div>
                     </Form>
