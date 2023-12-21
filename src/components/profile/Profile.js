@@ -97,7 +97,7 @@ const Profile = () => {
 
     return (
         <div>
-            <div>
+            <div className="trainer-main-profile">
                 <Navbar/>
                 <div className="profile-background">
                     <div className="profile-container larger-profile">

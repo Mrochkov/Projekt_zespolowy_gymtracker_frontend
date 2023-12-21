@@ -25,6 +25,7 @@
 
 .user-profile-row {
     min-width: 100vh;
+    min-height: 29vh;
 }
 
 .user-profile-header {
@@ -56,7 +57,7 @@
 .user-profile-details {
     text-align: center;
     font-size: 22px;
-    min-height: 31.5vh;
+    min-height: 28vh;
 
 }
 
@@ -83,7 +84,9 @@
 
 .user-profile-workout-cards {
     color: darkgrey;
+    transition: all 0.3s ease;
 }
+
 
 .user-profile-workout-card-details {
     padding-top: 20px;

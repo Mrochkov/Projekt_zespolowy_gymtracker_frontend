@@ -1,11 +1,14 @@
 .profile-background {
     color: white;
-    background-color: #1a1a1a;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+.trainer-main-profile {
+    background-image: url('../images/background.png');
+
 }
 
 .rating-icon {
@@ -94,7 +97,10 @@
     line-height: 1.4;
     color: lightgrey;
 }
-
+.bio {
+    padding-left: 40px;
+    padding-right: 40px;
+}
 .gyms{
 }
 
