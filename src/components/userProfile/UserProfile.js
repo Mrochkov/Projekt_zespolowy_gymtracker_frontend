@@ -145,9 +145,11 @@ useEffect(() => {
                                     <Card.Body className="p-5">
                                         <div className="user-profile-details">
                                             <h3 className="user-info">Current trainer</h3>
-                                            <p className="location">{user.trainer.name} {user.trainer.surname}</p>
+                                            <p className="location">{user.trainer ? `${user.trainer.name} ${user.trainer.surname}` : "no trainer assigned"} </p>
                                             <h3 className="user-info">Email</h3>
                                             <p className="location">{user.email}</p>
+                                            <h3 className="user-info">Joined:</h3>
+                                            <p className="location">{format(user.joined, "dd-MM-yyyy")}</p>
                                         </div>
                                     </Card.Body>
                                 </Card>

@@ -32,15 +32,19 @@ const SignUp = () => {
         e.preventDefault();
         console.log(user, "POSTED :>");
         await axios.post("http://127.0.0.1:8080/signup", user).catch(function (error) {
-            if (error.response) {
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-                alert(error.response.data.message)
+            if (error.response ) {
+                if(error.response.data.message === "Registration completed") {
+                    window.location = "/"
+                }
+                else {
+                    alert(error.response.data.message)
+                }
+
+
             } else if (error.request) {
-                console.log(error.request);
+                console.log("request")
             } else {
-                window.location = "/"
+                console.log("tak")
             }
 
 

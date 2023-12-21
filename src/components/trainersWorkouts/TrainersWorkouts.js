@@ -6,6 +6,8 @@ import Footer from "../footer/Footer";
 import api from "../../api/axiosConfig";
 import pop from "../images/2.png";
 import {format} from "date-fns";
+import { sortBy } from "lodash";
+
 
 const TrainersWorkouts = () => {
     const userId = 1;
@@ -13,23 +15,19 @@ const TrainersWorkouts = () => {
 
     const [user, setUser] = useState(null);
     const [expandedWorkout, setExpandedWorkout] = useState(null);
+    const [editedWorkout, setEditedWorkout] = useState({ feedback: "" });
     const [trainerWorkouts, setTrainerWorkouts] = useState([]);
     const [exercises, setExercises] = useState([]);
-    const [feedbacks, setFeedbacks] = useState({});
 
-    const handleFeedbackChange = (workoutId, newFeedback) => {
-        setFeedbacks({...feedbacks, [workoutId]: newFeedback});
-    };
 
     const handleFormClick = (event) => {
         event.stopPropagation();
     };
 
-    const submitFeedback = async (workoutId) => {
-        const feedback = feedbacks[workoutId];
-        await api.post('/feedback', { workoutId, feedback });
-        //console.log("Submitting feedback for workout", workoutId, ":", feedback);
+    const submitFeedback = async (workout) => {
+        await api.put('/workout', {workout: JSON.stringify(workout)});
     };
+
 
 
     useEffect(() => {
@@ -98,7 +96,8 @@ const TrainersWorkouts = () => {
                             <h1 className="workouts-header">My clients workouts</h1>
 
                             <h3 className="user-workout-history-title mb-3">Workout History</h3>
-                            {trainerWorkouts && trainerWorkouts.slice().reverse().map((workout, id) => (
+                                {sortBy(trainerWorkouts, "beginning_time")
+                                .map((workout, id) => (
                                 <Card key={id} className="user-profile-workout-container mb-3">
                                     <Card.Body className="user-profile-workout-cards" onClick={(e) => toggleWorkoutDetails(workout.id, e)}>
                                         <Card.Title className="user-login-title">{workout.userLogin}</Card.Title>
@@ -134,13 +133,23 @@ const TrainersWorkouts = () => {
                                                             className="workout-feedback"
                                                             as="textarea"
                                                             rows={3}
-                                                            value={feedbacks[workout.id] || ''}
-                                                            placeholder="Give feedback to the workout"
-                                                            onChange={e => handleFeedbackChange(workout.id, e.target.value)}
+                                                            value={workout.feedback}
+
+                                                            placeholder="Give feedback about the workout"
+                                                            onChange={(e) => setTrainerWorkouts((prevWorkouts) =>
+                                                                prevWorkouts.map((prevWorkout) =>
+                                                                    prevWorkout.id === expandedWorkout
+                                                                        ? { ...prevWorkout, feedback: e.target.value }
+                                                                        : prevWorkout
+                                                                )
+                                                            )}
+
                                                         />
                                                         <Button
                                                             className="submit-feedback-btn mt-2"
-                                                            onClick={() => submitFeedback(workout.id)}>
+                                                            //onClick={() => submitFeedback(editedWorkout)}>
+                                                            onClick={() => submitFeedback(workout, workout.feedback)}>
+
                                                             Submit Feedback
                                                         </Button>
                                                     </Form.Group>
