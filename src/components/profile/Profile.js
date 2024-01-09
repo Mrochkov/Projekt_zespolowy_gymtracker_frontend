@@ -60,12 +60,13 @@ const Profile = () => {
 
     const renderRating = () => {
         let rating = [];
+        const score = calculateAverageRating();
         for (let i = 0; i < 5; i++) {
             rating.push(
                 <FontAwesomeIcon
                     key={i}
                     icon={faDumbbell}
-                    className={i < 4 ? "rating-icon active" : "rating-icon"}
+                    className={i < score ? "rating-icon active" : "rating-icon"}
                 />
             );
         }
@@ -93,6 +94,18 @@ const Profile = () => {
 
     const getImagePath = (image) => {
         return require(`../images/${image}`);
+    };
+
+    const calculateAverageRating = () => {
+        if (opinions.length === 0) {
+            return 0; // Zwróć 0, jeśli brak opinii
+        }
+
+        const totalScore = opinions.reduce((acc, opinion) => acc + parseInt(opinion.score), 0);
+
+        const averageRating = Math.round(totalScore / opinions.length);
+
+        return averageRating;
     };
 
     return (

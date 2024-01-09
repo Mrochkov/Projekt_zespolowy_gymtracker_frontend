@@ -96,7 +96,7 @@ const TrainersWorkouts = () => {
                             <h1 className="workouts-header">My clients workouts</h1>
 
                             <h3 className="user-workout-history-title mb-3">Workout History</h3>
-                                {sortBy(trainerWorkouts, "beginning_time")
+                                {sortBy(trainerWorkouts, "beginning_time").slice().reverse()
                                 .map((workout, id) => (
                                 <Card key={id} className="user-profile-workout-container mb-3">
                                     <Card.Body className="user-profile-workout-cards" onClick={(e) => toggleWorkoutDetails(workout.id, e)}>
