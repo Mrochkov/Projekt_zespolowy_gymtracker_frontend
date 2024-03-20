@@ -217,7 +217,7 @@ class WorkoutTable extends Component {
                                 value={this.state.searchKeyword}
                                 onChange={this.handleSearchChange}
                             />
-                            <Form.Control as="select" onChange={this.handleExerciseSelect} multiple>
+                            <Form.Control className="exercise-select" as="select" onChange={this.handleExerciseSelect} multiple>
                                 {filteredExercises.map((exercise, index) => (
                                     <option key={index} value={exercise}>{exercise}</option>
                                 ))}

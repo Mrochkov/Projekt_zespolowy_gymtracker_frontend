@@ -13,7 +13,9 @@
 .modal-body {
     min-height: 500px;
 }
-
+.exercise-select{
+    height: 400px;
+}
 .table {
     background-color: #333;
     border-radius: 10px;
