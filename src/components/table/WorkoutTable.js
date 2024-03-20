@@ -24,18 +24,16 @@ class WorkoutTable extends Component {
                 comment: '',
                 exercises: [],
                 name: ''
-            }
+            },
+            searchKeyword: '',
+            filteredExercises: [],
         };
-
-
     }
 
     async componentDidMount() {
         try {
-            api.get('/exercise/names')
-                .then(response => {
-                    this.setState({ exercises: response.data });
-                })
+            const response = await api.get('/exercise/names');
+            this.setState({ exercises: response.data, filteredExercises: response.data });
 
             const userResponse = await api.get('/user');
             if (!userResponse.data) {
@@ -43,8 +41,9 @@ class WorkoutTable extends Component {
                 return;
             }
 
-            this.state.workout.userId = userResponse.data.id;
-
+            this.setState(prevState => ({
+                workout: { ...prevState.workout, userId: userResponse.data.id }
+            }));
         } catch (error) {
             console.error('Error fetching data:', error);
             window.location = '/login';
@@ -63,10 +62,16 @@ class WorkoutTable extends Component {
 
     handleExerciseSelect = (e) => {
         this.setState({
-            currentExercise: {name: e.target.value, sets: [{ weight: '', reps: '', setId: 1 }]},
+            currentExercise: { name: e.target.value, sets: [{ weight: '', reps: '', setId: 1 }] },
             showModal: false
         });
-        console.log(this.state.workout.exercises)
+    };
+
+    handleSearchChange = (e) => {
+        const { exercises } = this.state;
+        const keyword = e.target.value.toLowerCase();
+        const filteredExercises = exercises.filter(exercise => exercise.toLowerCase().includes(keyword));
+        this.setState({ searchKeyword: keyword, filteredExercises });
     };
 
     handleSetChange = (index, field, value) => {
@@ -140,7 +145,7 @@ class WorkoutTable extends Component {
     };
 
     render() {
-        const {showModal, currentExercise, workout, exercises} = this.state;
+        const { showModal, currentExercise, workout, filteredExercises } = this.state;
 
 
         return (
@@ -201,17 +206,22 @@ class WorkoutTable extends Component {
 
 
 
-                    <Modal show={showModal} onHide={() => this.setState({ showModal: false })}>
+                    <Modal show={showModal} onHide={() => this.setState({ showModal: false })} size="x1">
                         <Modal.Header closeButton>
                             <Modal.Title>Select an Exercise</Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>
-                            <Form.Select aria-label="Select Exercise" onChange={this.handleExerciseSelect}>
-                                <option value="">Open this select menu</option>
-                                {exercises.map((exercise, index) => (
+                        <Modal.Body className="modal-body">
+                            <Form.Control
+                                type="text"
+                                placeholder="Search exercise..."
+                                value={this.state.searchKeyword}
+                                onChange={this.handleSearchChange}
+                            />
+                            <Form.Control as="select" onChange={this.handleExerciseSelect} multiple>
+                                {filteredExercises.map((exercise, index) => (
                                     <option key={index} value={exercise}>{exercise}</option>
                                 ))}
-                            </Form.Select>
+                            </Form.Control>
                         </Modal.Body>
                     </Modal>
 
