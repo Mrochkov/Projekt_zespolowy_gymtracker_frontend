@@ -98,6 +98,13 @@ class WorkoutTable extends Component {
         }));
     };
 
+    handleModalOpen() {
+        this.setState({
+            showModal: true,
+            searchKeyword: '',
+            filteredExercises: this.state.exercises
+        });
+    }
 
     renderSets = (sets, isDisabled) => {
 
@@ -154,7 +161,7 @@ class WorkoutTable extends Component {
                 <div className="container-workout">
                     <h1>Your current workout</h1>
                     <p>Select exercise below. After the exercise is finished click "submit exercise"</p>
-                    <Button variant="primary mt-3" onClick={() => this.setState({ showModal: true })}>Select Exercise</Button>
+                    <Button variant="primary mt-3" onClick={() => this.handleModalOpen()}>Select Exercise</Button>
 
                     {workout.exercises.map((exercise, index) => (
                         <Card className="mt-4" bg="dark" text="white" key={index}>
@@ -206,7 +213,12 @@ class WorkoutTable extends Component {
 
 
 
-                    <Modal show={showModal} onHide={() => this.setState({ showModal: false })} size="x1">
+                    <Modal
+                        show={showModal}
+                        onEntered={() => this.setState({ searchKeyword: '' })}
+                        onHide={() => this.setState({ showModal: false })}
+                        size="x1"
+                    >
                         <Modal.Header closeButton>
                             <Modal.Title>Select an Exercise</Modal.Title>
                         </Modal.Header>
